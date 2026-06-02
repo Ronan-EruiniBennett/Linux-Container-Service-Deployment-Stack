@@ -1,0 +1,34 @@
+Infrastructure Operations Lab
+
+A self-hosted infrastructure operations lab for deploying, monitoring, and troubleshooting containerised services on Linux using Docker, Nginx, Flask, Gunicorn, and Bash.
+
+<h1>Project Overview<h1>
+This project was built to simulate enterprise environments, I wanted to learn how to utilise common technologies found within a cloud setting to improve my skills and allow for the creation of bigger projects using these technologies.
+
+/// DEMO GIF INSERT HERE
+
+<h1>Key Features<h1>
+
+<h1>Architecture<h1>
+
+<h1>Tech Stack<h1>
+
+<h1>Decisions<h1>
+
+<h1>Challenges<h1>
+//docker build -t infra-lab .
+ERROR: permission denied while trying to connect to the docker API at unix:///var/run/docker.sock//
+
+//ERROR: failed to build: failed to solve: 3.14-slim-bookworm: failed to resolve source metadata for docker.io/library/3.14-slim-bookworm:latest: pull access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed//
+
+
+
+<h1>Setup<h1>
+
+<h1>Testing<h1>
+
+<h1>Operations<h1>
+
+<h1>Security<h1>
+
+<h1>Roadmap<h1>

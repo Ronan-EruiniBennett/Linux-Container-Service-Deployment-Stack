@@ -1,4 +1,4 @@
-FROM 3.14-slim-bookworm
+FROM python:3.14-slim-bookworm
 WORKDIR /app
 
 COPY flask-app/requirements.txt .
