@@ -3,11 +3,19 @@ Infrastructure Operations Lab
 A self-hosted infrastructure operations lab for deploying, monitoring, and troubleshooting containerised services on Linux using Docker, Nginx, Flask, Gunicorn, and Bash.
 
 <h1>Project Overview<h1>
-This project was built to simulate enterprise environments, I wanted to learn how to utilise common technologies found within a cloud setting to improve my skills and allow for the creation of bigger projects using these technologies.
+This project was built to practise the foundations of cloud and platform engineering by deploying an application in a Linux-based environment using Docker.
+
+Instead of focusing only on application code, the project explores how an app is packaged, configured, networked, and run in a more production-like setting. It helped me understand the relationship between source code, runtime dependencies, containers, ports, environment configuration, and deployment infrastructure.
+
 
 /// DEMO GIF INSERT HERE
 
 <h1>Key Features<h1>
+
+- **Containerised runtime with Docker:** packaged the app, dependencies, exposed port, and startup command into a reproducible image so the same build can run consistently across CI and compatible Linux AMD64 deployment environments.
+
+
+
 
 <h1>Architecture<h1>
 
