@@ -28,7 +28,8 @@ if sudo docker ps --format '{{.Names}}' | grep -q "^${NAME}$"; then
 	while [ "$TEST" == "y" ]; do
 		echo "Which API endpoint do you want to test? Include the / prefix (/,/health,/metrics,/version)"
 		read ENDPOINT
-		curl "localhost:${PORT}${ENDPOINT}"
+		sleep 2
+		curl -i "localhost:${PORT}${ENDPOINT}"
 		sleep 0.5
 		echo "Would you like to test another endpoint? (y/n)"
 		read TEST
@@ -38,7 +39,9 @@ if sudo docker ps --format '{{.Names}}' | grep -q "^${NAME}$"; then
 	read STOP
 	if [ "$STOP" == "y" ]; then
 		sudo docker stop $NAME
+		echo "Container stopped"
 		sudo docker rm $NAME
+		echo "Container removed"
 	else
 		echo "Container is still running, manual shutdown required"
 	fi
