@@ -19,7 +19,7 @@ echo "Container being created with name $NAME and on port $PORT"
 sleep 0.5
 
 echo "Container ID:"
-sudo docker run -d --name $NAME -p $PORT:5000 -t infra-lab
+sudo docker run -d --name $NAME -p 127.0.0.1:$PORT:5000 -t infra-lab
 
 if sudo docker ps --format '{{.Names}}' | grep -q "^${NAME}$"; then
 	echo "Container running"
