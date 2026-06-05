@@ -1,0 +1,59 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  BuildAndValidate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v4
+    - name: install shellcheck
+      run: |
+       sudo apt-get update
+       sudo apt-get install -y shellcheck
+    - name: validate bash scripts
+      run: |
+       for script in scripts/*.sh; do 
+       echo "checking $script"  
+       bash -n "$script"
+       echo "Shellchecking Script"
+       shellcheck "$script"
+       done
+    - name: Build the Docker image
+      run: docker build -t infra-lab .
+    - name: Run docker image
+      run: docker run -d --name flask-app -p 5000:5000 infra-lab
+    - name: Check container health
+      run: |
+       ENDPOINTS=("/"
+       "/health"
+       "/version"
+       "/metrics"
+       )
+       for endpoint in "${ENDPOINTS[@]}"; do
+        echo "Testing $endpoint"
+        for i in {1..20}; do
+         if curl -fsS "http://localhost:5000${endpoint}"; then
+         echo "$endpoint healthy"
+         fi
+         done
+       done
+       echo "All endpoints healthy"
+    - name: Cleanup
+      if: always()
+      run: | 
+         docker stop flask-app || true
+         docker rm flask-app || true
+       
+      
+        
+        
