@@ -29,7 +29,7 @@ jobs:
             bash -n "$script"
 
             echo "ShellChecking script"
-            shellcheck "$script"
+            shellcheck -x "$script"
           done
 
       - name: Build Docker image
