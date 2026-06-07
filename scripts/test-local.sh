@@ -2,7 +2,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-# shellcheck source=./config.sh
+# shellcheck source=./scripts/config.sh
 source "$SCRIPT_DIR/config.sh"
 
 if [[ "$(docker inspect -f '{{.State.Running}}' $NAME 2>/dev/null)" == "true" ]]; then
