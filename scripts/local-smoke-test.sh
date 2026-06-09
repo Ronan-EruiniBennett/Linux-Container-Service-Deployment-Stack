@@ -5,7 +5,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=./scripts/config.sh
 source "$SCRIPT_DIR/config.sh"
 
-if [[ "$(docker inspect -f '{{.State.Running}}' $NAME 2>/dev/null)" == "true" ]]; then
+if [[ "$(sudo docker inspect -f '{{.State.Running}}' $NAME 2>/dev/null)" == "true" ]]; then
     echo "PASS: Container $NAME is running"
 else
     echo "FAIL: Container $NAME is not running"
@@ -15,7 +15,7 @@ fi
 sleep 2
 
 echo "Checking Docker port mapping..."
-docker port "$CONTAINER_NAME" "$CONTAINER_PORT" | grep -q "$HOST_PORT"
+sudo docker port "$NAME" "$CONTAINER_PORT" | grep -q "$HOST_PORT"
 echo "PASS: Container port $CONTAINER_PORT is mapped to host port $HOST_PORT"
 
 sleep 2
