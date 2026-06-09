@@ -15,7 +15,7 @@ fi
 sleep 2
 
 echo "Checking Docker port mapping..."
-sudo docker port "$CONTAINER_NAME" "$CONTAINER_PORT" | grep -q "$HOST_PORT"
+sudo docker port "$NAME" "$CONTAINER_PORT" | grep -q "$HOST_PORT"
 echo "PASS: Container port $CONTAINER_PORT is mapped to host port $HOST_PORT"
 
 sleep 2
