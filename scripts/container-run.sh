@@ -20,4 +20,5 @@ if sudo docker ps --format '{{.Names}}' | grep -q "^${NAME}$"; then
 	echo "Container running"
 else
 	echo "Container is not running"
+	exit 1
 fi

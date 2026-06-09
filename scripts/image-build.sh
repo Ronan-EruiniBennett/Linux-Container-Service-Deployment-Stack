@@ -12,4 +12,5 @@ if sudo docker build -t $TAG . ;
         echo "Docker image built successfully with tag $TAG"
     else
         echo "Failed to build Docker image with tag $TAG"
+        exit 1
 fi
