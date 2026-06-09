@@ -1,30 +1,22 @@
-Infrastructure Operations Lab
+# Infrastructure Operations Lab
 
 A self-hosted infrastructure operations lab for deploying, monitoring, and troubleshooting containerised services on Linux using Docker, Nginx, Flask, Gunicorn, and Bash.
 
-<h1>Project Overview<h1>
-This project was built to practise the foundations of cloud and platform engineering by deploying an application in a Linux-based environment using Docker.
+## Project Overview
+This project emulates a small production like service environment where a containerised web application is deployed, presented through a reverse proxy, validated and tested through scripts. The goal was to develop professional experience of Linux administration, containerisation, networking, deployment workflows, and troubleshooting.
 
 Instead of focusing only on application code, the project explores how an app is packaged, configured, networked, and run in a more production-like setting. It helped me understand the relationship between source code, runtime dependencies, containers, ports, environment configuration, and deployment infrastructure.
 
+## Architecture
 
-/// DEMO GIF INSERT HERE
 
-<h1>Key Features<h1>
+## Key Features
 
 - **Containerised runtime with Docker:** packaged the app, dependencies, exposed port, and startup command into a reproducible image so the same build can run consistently across CI and compatible Linux AMD64 deployment environments.
 
+- 
 
-
-
-
-<h1>Architecture<h1>
-
-<h1>Tech Stack<h1>
-
-<h1>Decisions<h1>
-
-<h1>Challenges<h1>
+## Challenges
 
 ### Diagnosing Docker Container Networking After VM Resume
 
@@ -40,17 +32,6 @@ I reproduced this issue multiple times after suspending and resuming the VM. The
 
 The main lesson was to debug by layer: host network first, then container network, then Docker bridge configuration, then Linux routing. This avoided wasting time changing Python dependencies when the actual failure was network reachability from the build container.
 
-
 ### Validating Nginx Reverse Proxy Configuration
 
 After applying new Nginx configuration files, the browser could not reach the app. Rather than debugging only from the browser, I validated the configuration with `nginx -t` and found directive syntax errors. This reinforced the importance of validating service configuration before deployment, particularly because a broken entry point can take an application offline.
-
-<h1>Setup<h1>
-
-<h1>Testing<h1>
-
-<h1>Operations<h1>
-
-<h1>Security<h1>
-
-<h1>Roadmap<h1>
