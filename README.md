@@ -20,17 +20,21 @@ Instead of focusing only on application code, the project explores how an app is
 
 ### Diagnosing Docker Container Networking After VM Resume
 
-During the Docker image build, the RUN pip install --no-cache-dir -r requirements.txt step failed because pip could not resolve packages from PyPI. Although the failure occurred during Python dependency installation, the error log showed DNS resolution failures, so I treated it as a network issue rather than immediately changing the requirements file, package versions, or base image.
+**Symptom:** Pip install failure for `requirements.txt` on Docker image build as docker couldn't resolve or reach external package repositories
 
-I first tested connectivity and DNS resolution from the Ubuntu VM itself using both IP addresses and domain names. These tests succeeded, which ruled out general VM-level connectivity and DNS problems. I then ran the slim Python base image independently and used a `python -c` command with the socket library to test DNS resolution and external connectivity from inside a container. Both tests failed, which narrowed the fault to Docker’s container networking layer.
+**Investigation:**
 
-I inspected the Docker network state by checking the host interfaces with `ip a`, confirming that the docker0 interface existed. I then checked the host routing table with ip route and found that the expected route to the Docker bridge subnet was missing. To verify that Docker still had a bridge network configured, I used docker network inspect bridge and confirmed that the bridge network existed and had an assigned subnet.
+* Verified it wasn't a core dependency problem due to using the Python slim image, but a networking issue
+* Tested DNS resolution and ping to an IP from the VM host
+* Ran the base image on its own and had it run commands for DNS resolution and connection to an IP from inside the container; both failed
+* Checked the existence of the Docker bridge subnet and `docker0` interface
+* Examined VM routing tables and found the route to the Docker bridge subnet was missing
 
-Restarting the Docker service recreated the missing route, after which container DNS and external connectivity worked correctly and the image build completed successfully.
+**Likely Root Cause:**
+Suspending the VM and resuming it without completely powering it off likely caused some of Docker’s networking state to not be fully restored, resulting in the missing route for the Docker subnet
 
-I reproduced this issue multiple times after suspending and resuming the VM. The failure pattern was consistent: after resume, the Docker bridge network still existed, but the host route to the bridge subnet was missing. Restarting Docker restored the route. This showed that the immediate fault was not Python, PyPI, or the dependency list, but Docker’s bridge networking becoming out of sync with the VM’s network state after suspend/resume.
-
-The main lesson was to debug by layer: host network first, then container network, then Docker bridge configuration, then Linux routing. This avoided wasting time changing Python dependencies when the actual failure was network reachability from the build container.
+**Resolution:**
+Restarted the Docker service to restore connectivity to containers, and going forward I’ll fully power off the VM instead of relying on suspend/resume when Docker networking is active.
 
 ### Validating Nginx Reverse Proxy Configuration
 
