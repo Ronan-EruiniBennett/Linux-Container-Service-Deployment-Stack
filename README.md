@@ -31,9 +31,11 @@ Instead of focusing only on application code, the project explores how an app is
 * Examined VM routing tables and found the route to the Docker bridge subnet was missing
 
 **Likely Root Cause:**
+
 Suspending the VM and resuming it without completely powering it off likely caused some of Docker’s networking state to not be fully restored, resulting in the missing route for the Docker subnet
 
 **Resolution:**
+
 Restarted the Docker service to restore connectivity to containers, and going forward I’ll fully power off the VM instead of relying on suspend/resume when Docker networking is active.
 
 ### Validating Nginx Reverse Proxy Configuration
@@ -46,7 +48,9 @@ Restarted the Docker service to restore connectivity to containers, and going fo
 * Validated configuration with `nginx -t`
 
 **Likely Root Cause:**
+
 There were directive syntax errors in the configuration file I created, so Nginx could not safely reload the new configuration and proxy traffic to my backend correctly.
 
 **Resolution:**
+
 Corrected the syntax errors identified by `nginx -t`. Moving forward, this reinforced the importance of validating all configuration and code before deployment, especially when changes affect the application's entry point.
