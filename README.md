@@ -1,13 +1,16 @@
 [![Docker Image CI](https://github.com/Ronan-EruiniBennett/Infrastructure_operations_lab/actions/workflows/docker-image.yml/badge.svg)](https://github.com/Ronan-EruiniBennett/Infrastructure_operations_lab/actions/workflows/docker-image.yml)
 
-# Infrastructure Operations Lab
+# Linux Container Service Deployment Stack
 
-A self-hosted infrastructure operations lab for deploying, monitoring, and troubleshooting containerised services on Linux using Docker, Nginx, Flask, Gunicorn, and Bash.
+A Linux-based deployment stack for operating a containerised web service behind Nginx, with Docker port mappings, firewall controls, SSH administration, and automated network-path validation.
 
 ## Project Overview
-This project emulates a small production like service environment where a containerised web application is deployed, presented through a reverse proxy, validated and tested through scripts. The goal was to develop professional experience of Linux administration, containerisation, networking, deployment workflows, and troubleshooting.
 
-Instead of focusing only on application code, the project explores how an app is packaged, configured, networked, and run in a more production-like setting. It helped me understand the relationship between source code, runtime dependencies, containers, ports, environment configuration, and deployment infrastructure.
+This project implements a small production-like service environment for deploying and operating a containerised web application on a Linux host.
+
+The application runs as a Flask/Gunicorn service inside Docker and is exposed through an Nginx reverse proxy on the host. Bash scripts automate the build, run, configuration, validation, and cleanup workflows, while smoke tests verify that the deployed service responds correctly through the expected network path.
+
+The environment is hosted on a local Linux VM and administered over SSH using key-based access. Supporting infrastructure includes UFW firewall rules, host-level file permission controls, Docker port mappings, Nginx configuration validation, and troubleshooting procedures for failures across the Linux host, container runtime, networking layer, and application service.
 
 ### Tech Stack
 
@@ -97,6 +100,8 @@ flowchart TD
 
 
 - **Nginx Reverse Proxy:** configured Nginx as the public HTTP entry point on port 80, proxying requests to the Docker-hosted backend exposed on the host loopback interface. This reduced direct network exposure for the backend, separated public traffic handling from the application runtime, and provided a central layer for access logging, request header forwarding, and future TLS termination.
+
+- **SSH-based remote administration:** configured key-based SSH access to manage the Linux VM, run deployment scripts, troubleshoot Docker/Nginx issues, and validate service health from the command line. Configured Linux ufw to only accept SSH and Nginx http traffic. 
 
 ## Challenges
 
