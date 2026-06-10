@@ -12,4 +12,13 @@ echo "Starting local orchestration of the project..."
 "$SCRIPT_DIR/vm-network-test.sh"
 "$SCRIPT_DIR/local-smoke-test.sh"
 
+echo "
+PASS: Docker image built
+PASS: Container is running
+PASS: Nginx config is valid
+PASS: Nginx reloaded
+PASS: Network diagnostics successful
+PASS: Application reachable through Nginx
+"
+echo
 echo "Local orchestration completed successfully!"

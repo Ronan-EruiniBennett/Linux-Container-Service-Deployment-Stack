@@ -108,9 +108,7 @@ flowchart TD
 
 ### Diagnosing Docker Container Networking After VM Resume
 
-**Symptom:** 
-
-Pip install failure for `requirements.txt` on Docker image build as docker couldn't resolve or reach external package repositories
+**Symptom:** Pip install failure for `requirements.txt` on Docker image build as docker couldn't resolve or reach external package repositories
 
 **Investigation:**
 
@@ -127,7 +125,6 @@ Suspending the VM and resuming it without completely powering it off likely caus
 **Resolution:**
 
 Restarted the Docker service to restore connectivity to containers, and going forward I’ll fully power off the VM instead of relying on suspend/resume when Docker networking is active.
-
 
 
 ### Validating Nginx Reverse Proxy Configuration
