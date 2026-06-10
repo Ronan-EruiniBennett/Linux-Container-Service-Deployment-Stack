@@ -108,7 +108,9 @@ flowchart TD
 
 ### Diagnosing Docker Container Networking After VM Resume
 
-**Symptom:** Pip install failure for `requirements.txt` on Docker image build as docker couldn't resolve or reach external package repositories
+**Symptom:** 
+
+Pip install failure for `requirements.txt` on Docker image build as docker couldn't resolve or reach external package repositories
 
 **Investigation:**
 
