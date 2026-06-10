@@ -14,27 +14,27 @@ Instead of focusing only on application code, the project explores how an app is
 ### Tech Stack
 
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-
 ![Shell Script](https://img.shields.io/badge/Shell_Script-121011?style=flat&logo=gnu-bash&logoColor=white)
-
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-
 ![Flask](https://img.shields.io/badge/Flask-000000?style=flat&logo=flask&logoColor=white)
-
 ![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white)
-
 ![Gunicorn](https://img.shields.io/badge/gunicorn-%298729.svg?style=for-the-badge&logo=gunicorn&logoColor=white)
-
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
-
 ![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)
 
 
 ## Key Features
 
+- **GitHub Actions CI:** built a GitHub Actions workflow to automatically validate Bash script syntax, run ShellCheck, build the Docker image, start the Flask/Gunicorn container, and test the end-to-end request flow across the application endpoints.
+
+
+- **Bash Automation:** created Bash scripts to automate the deployment workflow, including network diagnostic checks, Docker image builds, Nginx configuration validation and reloads, container deployment, endpoint testing, and clean-up.
+
+
 - **Containerised runtime with Docker:** packaged the app, dependencies, exposed port, and startup command into a reproducible image so the same build can run consistently across CI and compatible Linux AMD64 deployment environments.
 
-- 
+
+- **Nginx Reverse Proxy:** configured Nginx as the public HTTP entry point on port 80, proxying requests to the Docker-hosted backend exposed on the host loopback interface. This reduced direct network exposure for the backend, separated public traffic handling from the application runtime, and provided a central layer for access logging, request header forwarding, and future TLS termination.
 
 ## Challenges
 
