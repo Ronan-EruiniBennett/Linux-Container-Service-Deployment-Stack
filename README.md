@@ -16,7 +16,7 @@ The environment is hosted on a local Linux VM and administered over SSH using ke
 ![Automated web app start up](./docs/assets/script.gif)
 
 
-### Application access Nginx
+### Application access through Nginx
 ![Web Curl](./docs/assets/browser-get.gif)
 
 ### Tech Stack
